@@ -2,7 +2,7 @@ from PIL import Image, UnidentifiedImageError
 from datetime import date
 from rembg import remove
 
-import awswrangler as wr
+import boto3
 import requests
 import uuid
 import io
@@ -56,10 +56,13 @@ def handler(event, context):
         bucket = os.environ['BUCKET_NAME']
         path = f'remove-bg/{date.today()}/{local_file}'
         # Save image to S3
-        wr.s3.upload(
-            local_file=local_file, 
-            path=f"s3://{bucket}/{path}"
-        )
+        # wr.s3.upload(
+        #     local_file=local_file, 
+        #     path=f"s3://{bucket}/{path}"
+        # )
+
+        s3 = boto3.client('s3')
+        s3.upload_file(local_file, bucket, path)
         response["body"]["url"] = f'https://{bucket}.s3.ap-southeast-1.amazonaws.com/{path}'
         os.remove(local_file)
 

@@ -6,7 +6,9 @@ WORKDIR ${LAMBDA_TASK_ROOT}
 COPY . ./
 
 # Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install poetry
+RUN poetry export --without-hashes --format=requirements.txt > requirements.txt
+RUN pip install -r requirements.txt -t .
 
 # Set the CMD to your Lambda handler function
 CMD [ "lambda_function.handler" ]

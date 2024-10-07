@@ -1,11 +1,20 @@
-[project]
-name = "image-transform"
+[tool.poetry]
+name = "remove-bg"
 version = "0.1.0"
-description = "Add your description here"
+description = ""
+authors = ["Icerawe <icerawe@live.com>"]
 readme = "README.md"
-requires-python = ">=3.9"
-dependencies = [
-    "awswrangler>=3.9.1",
-    "pytest>=8.3.3",
-    "rembg>=2.0.59",
-]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.13"
+pytest = "^8.3.3"
+pillow = "^10.4.0"
+rembg = "2.0.59"
+onnxruntime = "1.16.2"
+urllib3 = "1.25.4"
+boto3 = "^1.35.33"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
