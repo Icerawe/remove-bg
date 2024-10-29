@@ -1,5 +1,4 @@
 # test_lambda_function.py
-import pytest
 from lambda_function import handler
 
 def test_handler():
@@ -12,6 +11,7 @@ def test_handler():
 
     # Call the handler
     response = handler(request, None)
+    print(response)
 
     # Assert the response
     assert response['statusCode'] == 200
